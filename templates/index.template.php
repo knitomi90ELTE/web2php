@@ -18,7 +18,10 @@
     </div>
 </nav>
     <div class="container">
-        asd
+        asdfasdfasdf
+        <a href="login">LOGIN</a>
+        <a href="registration">REGISTRATION</a>
+        <a href="game">GAME</a>
     </div>
 </body>
 </html>

@@ -3,38 +3,37 @@
 require_once('common/fileio.php');
 require_once('common/flash.php');
 require_once('common/navigation.php');
+require_once('common/validation.php');
 
-function validate($input, &$data, &$errors, $jelszavak) {
-    $errors = [];
+/*
+Legyen lehetőség regisztrálni az alkalmazásba.
+Ehhez név, jelszó, email cím megadása szükséges.
+Mindegyik kötelező mező, email cím formátumának ellenőrzése szükséges.
 
-    $felhnev = trim($input['felhnev']);
-    $jelszo = $input['jelszo'];
-
-    if (strlen($felhnev) == 0) {
-        $errors[] = 'Nincs felhnev!';
-    } else {
-        $data['felhnev'] = $felhnev;
-    }
-    if (strlen($jelszo) == 0) {
-        $errors[] = 'Nincs jelszo!';
-    } else {
-        $data['jelszo'] = $jelszo;
-    }
-    if (array_key_exists($felhnev, $jelszavak)) {
-        $errors[] = 'Letezo felhnev!';
-    }
-
-    return !(bool)$errors;
-}
-
+*/
+var_dump($_POST);
 $jelszavak = fajlbol_betolt('data/users.json');
 $errors = [];
+$data = [];
+$rules = [
+    'name' => [
+        'filter' => FILTER_DEFAULT,
+    ],
+    'email' => [
+        'filter' => FILTER_VALIDATE_EMAIL,
+        'errormsg' => 'Email nem megfelelő.',
+    ],
+    'password' => [
+        'filter' => FILTER_DEFAULT,
 
-if (validate($_POST, $data, $errors, $jelszavak)) {
-    $felhnev = $data['felhnev'];
-    $jelszo = $data['jelszo'];
+    ],
+];
+if (validate($_POST, $rules, $data, $errors)) {
+    $name = $data['name'];
+    $email = $data['email'];
+    $password = $data['password'];
 
-    $jelszavak[$felhnev] = md5($jelszo);
+    $jelszavak[$email] = md5($jelszo);
     fajlba_ment('data/users.json', $jelszavak);
 
     redirect('login');

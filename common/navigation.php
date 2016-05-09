@@ -1,6 +1,6 @@
 <?php
 
 function redirect($page) {
-  header("Location: index.php?{$page}");
+  header("Location: {$page}");
   exit();
 }

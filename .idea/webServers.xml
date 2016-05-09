@@ -5,6 +5,14 @@
       <webServer id="eae4dc8e-651f-4cea-b58a-7a15905cb3e5" name="Apache XAMPP" url="http://localhost">
         <fileTransfer port="0" mountedRoot="C:\xampp\htdocs" accessType="MOUNT" />
       </webServer>
+      <webServer id="fd697b09-09ac-4c52-aa87-a326cd3e0ac7" name="webprogramozas.inf.elte.hu" url="http://webprogramozas.inf.elte.hu">
+        <fileTransfer host="webprogramozas.inf.elte.hu" port="22" rootFolder="/home/hallgatok/knitomi90/www/bead" accessType="SFTP" password="dfe6dfcfdfcbdfcedfd9dfdedfcbdfd8df9bdf9adf9adf9f" username="knitomi90">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>
