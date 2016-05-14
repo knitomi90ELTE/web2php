@@ -31,12 +31,12 @@
 
     <form action="" method="post">
         <fieldset class="form-group">
-            <label>Felhasználónév:</label>
-            <input type="text" name="felhnev" class="form-control">
+            <label>Email:</label>
+            <input type="text" name="email" class="form-control">
         </fieldset>
         <fieldset class="form-group">
             <label>Jelszó:</label>
-            <input type="password" name="jelszo" class="form-control">
+            <input type="password" name="password" class="form-control">
         </fieldset>
         <button class="btn btn-primary" type="submit" name="login">Belépés</button>
     </form>

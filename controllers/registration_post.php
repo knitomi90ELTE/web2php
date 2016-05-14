@@ -29,11 +29,11 @@ $rules = [
     ],
 ];
 if (validate($_POST, $rules, $data, $errors)) {
-    $name = $data['name'];
+    //$name = $data['name'];
     $email = $data['email'];
     $password = $data['password'];
 
-    $jelszavak[$email] = md5($jelszo);
+    $jelszavak[$email] = md5($password);
     fajlba_ment('data/users.json', $jelszavak);
 
     redirect('login');
