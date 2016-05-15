@@ -1,34 +1,5 @@
 window.addEventListener('load', init, false);
-/*
- var CONSTANTS = {
- DEFAULT_ROW_COUNT: 10,
- DEFAULT_COL_COUNT: 10,
- DEFAULT_OBS_COUNT: 2,
- SNAKE_START: {
- x: 0,
- y: 0
- },
- DEFAULT_SNAKE: {
- direction: 0,
- cells: [],
- extending: 0
- },
- DEFAULT_GAME: {
- running: null,
- score: 1,
- runnningInterval: 400
- },
- DEFAULT_TABLE: {
- scrollOnTable: {
- type: null,
- position: null
- },
- obstacles: [],
- mirrorEffect: false,
- reverseEffect: false
- }
- };
- */
+
 var game = {
     running: null,
     score: 1,
@@ -58,20 +29,6 @@ var formData = {
     obsCount: null
 };
 
-/*
- 0 -> jobbra
- 1 -> fel
- 2 -> balra
- 3 -> le
- */
-/*
- Bölcsesség tekercse (80%): a sárkány 4 egységgel növekszik tőle.
- Tükrök tekercse (4%): az irányítás tükörképben történik irányonként (fel helyett le, bal helyett jobb).
- Fordítás tekercse (4%): a sárkány haladási iránya megfordul (feje és farka helyett cserél).
- Mohóság tekercse (4%): a sárkány haladási sebessége másfélszeresére nő 5 másodpercig.
- Lustaság tekercse (4%): a sárkány haladási sebessége másfélszeresére csökken 5 másodpercig.
- Falánkság tekercse (4%): a sárkány 10 egységgel növekszik tőle.
- */
 var scrolls = {
     wisdom: {//kék
         name: 'Bölcsesség tekercse',
@@ -91,11 +48,6 @@ var scrolls = {
     reverse: {//zöld
         name: 'Fordítás tekercse',
         execute: function () {
-            /*pauseGame();
-             snake.cells.reverse();
-             calculateDirection(snake.cells[snake.cells.length - 1]);
-             table.reverseEffect = true;
-             startGame();*/
             $('#scroll').innerHTML = 'Aktív tekercs: ' + this.name + ' (nem működik)';
         },
         hasEffect: false
@@ -206,7 +158,7 @@ function changeColumnColor(cell, color) {
 }
 
 function colorColumn(cell) {
-    getColumn(cell.x, cell.y).innerHTML = '<img src="images/body.png" class="snake-body">';
+    getColumn(cell.x, cell.y).innerHTML = '<img src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/images/body.png" class="snake-body">';
 }
 
 function removeSnakeCell(cell) {
@@ -226,31 +178,23 @@ function drawSnake() {
         return;
     }
     var head = snake.cells[snake.cells.length - 1];
-    getColumn(head.x, head.y).innerHTML = '<img src="images/head_' + snake.direction + '.png" class="snake-body">';
+    getColumn(head.x, head.y).innerHTML = '<img src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/images/head_' + snake.direction + '.png" class="snake-body">';
 }
 
 function initSnake() {
     snake.cells = [{x: 0, y: 0}];
     var head = snake.cells[snake.cells.length - 1];
-    getColumn(head.x, head.y).innerHTML = '<img src="images/head_' + snake.direction + '.png" class="snake-body">';
+    getColumn(head.x, head.y).innerHTML = '<img src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/images/head_' + snake.direction + '.png" class="snake-body">';
 }
 
 function initObstacles() {
     for (var i = 0; i < formData.obsCount; i++) {
         var coord = getRandomCell();
         table.obstacles.push(coord);
-        getColumn(coord.x, coord.y).innerHTML = '<img src="images/obstacle.png" class="sm-img">';
+        getColumn(coord.x, coord.y).innerHTML = '<img src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/images/obstacle.png" class="sm-img">';
     }
 }
 
-/*
- 0-79
- 80-83
- 84-87
- 88-91
- 92-95
- 96-99
- */
 var first = true;
 function getScroll() {
     var x = Math.floor(Math.random() * 100);
@@ -285,14 +229,12 @@ function removeScroll() {
     }
 }
 
-
-
 function placeScroll() {
     var coord = getRandomCell();
     var type = getScroll();
     table.scrollOnTable.position = coord;
     table.scrollOnTable.type = scrolls[type];
-    getColumn(coord.x, coord.y).innerHTML = '<img src="images/' + type + '.png" class="sm-img">';
+    getColumn(coord.x, coord.y).innerHTML = '<img src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/images/' + type + '.png" class="sm-img">';
 }
 
 function clearTable() {
@@ -303,9 +245,6 @@ function resetData() {
     $('#n').value = 10;
     $('#m').value = 10;
     $('#k').value = 2;
-    //game = CONSTANTS.DEFAULT_GAME;
-    //table = CONSTANTS.DEFAULT_TABLE;
-    //snake = CONSTANTS.DEFAULT_SNAKE;
 
     game = {
         running: null,
@@ -371,17 +310,7 @@ function resetRunningInterval() {
 function updateScoreLabel() {
     $('#score').innerHTML = 'Score: ' + game.score;
 }
-/*
- function disableButtons() {
- $('#startGame').classList.add("disabled");
- $('#pauseGame').classList.add("disabled");
- }
- 
- function enableButtons() {
- $('#startGame').classList.remove("disabled");
- $('#pauseGame').classList.remove("disabled");
- }
- */
+
 function generateTable() {
     if (!game.running) {
         formData.colCount = $('#n').value;
@@ -522,3 +451,4 @@ function toggleIssues() {
     }
     helpShowed = !helpShowed;
 }
+generateTable();

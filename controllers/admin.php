@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: capri
- * Date: 2016. 05. 07.
- * Time: 10:49
- */
+require_once('common/fileio.php');
+$levels = fajlbol_betolt('data/level.json');
+include('templates/admin.template.php');

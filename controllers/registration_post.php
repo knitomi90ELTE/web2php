@@ -11,7 +11,7 @@ Ehhez név, jelszó, email cím megadása szükséges.
 Mindegyik kötelező mező, email cím formátumának ellenőrzése szükséges.
 
 */
-var_dump($_POST);
+//var_dump($_POST);
 $jelszavak = fajlbol_betolt('data/users.json');
 $errors = [];
 $data = [];
@@ -28,12 +28,16 @@ $rules = [
 
     ],
 ];
-if (validate($_POST, $rules, $data, $errors)) {
-    //$name = $data['name'];
-    $email = $data['email'];
-    $password = $data['password'];
 
-    $jelszavak[$email] = md5($password);
+if (validate($_POST, $rules, $data, $errors)) {
+    $array = [
+        'name' => $data['name'],
+        'password' => md5($data['password']),
+        'email' => $data['email'],
+        'score' => 0
+    ];
+
+    $jelszavak[] = $array;
     fajlba_ment('data/users.json', $jelszavak);
 
     redirect('login');

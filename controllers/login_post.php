@@ -10,7 +10,7 @@ function validate($input, &$errors, $jelszavak) {
 
     $email = trim($input['email']);
     $jelszo = trim($input['password']);
-    if (!(array_key_exists($email, $jelszavak) && $jelszavak[$email] == md5($jelszo))) {
+    if (!(array_key_exists($email, $jelszavak) && $jelszavak[$email]['password'] == md5($jelszo))) {
         $errors[] = 'Hibás bejelentkezési adatok!';
     }
     return !(bool)$errors;
@@ -20,10 +20,18 @@ $jelszavak = fajlbol_betolt('data/users.json');
 $errors = [];
 
 if (validate($_POST, $errors, $jelszavak)) {
-    $email = $_POST['email'];
     $_SESSION['belepve'] = true;
-    $_SESSION['email'] = $email;
-    redirect('index');
+    $email = $_POST['email'];
+    $user = [
+        'name' => $jelszavak[$email]['name'],
+        'email' => $jelszavak[$email]['email'],
+        'score' => $jelszavak[$email]['score']
+    ];
+    $_SESSION['user'] = $user;
+
+    $_SESSION['admin'] = (bool)($email == 'admin@admin.hu');
+
+    redirect('admin');
 } else {
     set_flash_data('errors', $errors);
     redirect('login');
