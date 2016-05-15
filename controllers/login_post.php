@@ -22,15 +22,8 @@ $errors = [];
 if (validate($_POST, $errors, $jelszavak)) {
     $_SESSION['belepve'] = true;
     $email = $_POST['email'];
-    $user = [
-        'name' => $jelszavak[$email]['name'],
-        'email' => $jelszavak[$email]['email'],
-        'score' => $jelszavak[$email]['score']
-    ];
-    $_SESSION['user'] = $user;
-
+    $_SESSION['user'] = $jelszavak[$email];
     $_SESSION['admin'] = (bool)($email == 'admin@admin.hu');
-
     redirect('admin');
 } else {
     set_flash_data('errors', $errors);

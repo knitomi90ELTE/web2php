@@ -136,7 +136,7 @@ function init() {
     $('#startGame').addEventListener('click', startGame, false);
     $('#pauseGame').addEventListener('click', pauseGame, false);
     $('#generateButton').addEventListener('click', generateTable, false);
-    $('#newGame').addEventListener('click', resetData, false);
+    $('#newGame').addEventListener('click', /*resetData*/generateTable, false);
     $('#toggleHelpButton').addEventListener('click', toggleHelp, false);
     $('#toggleIssuesButton').addEventListener('click', toggleIssues, false);
 }
@@ -242,9 +242,9 @@ function clearTable() {
 }
 
 function resetData() {
-    $('#n').value = 10;
-    $('#m').value = 10;
-    $('#k').value = 2;
+    //$('#n').value = 10;
+    //$('#m').value = 10;
+    //$('#k').value = 2;
 
     game = {
         running: null,
@@ -279,8 +279,9 @@ function resetData() {
 function gameOver() {
     pauseGame();
     showMyModal("Sajnos akadálynak vagy falnak ütköztél");
-    var data = 'score='+game.score+'&levelID='+levelID;
     if(loggedIn){
+        var data = 'score='+game.score+'&levelID='+levelID;
+        console.log('sending ajax...' + data);
         ajax({
             mod : 'POST',
             url: 'http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/index.php/savescore',
@@ -466,4 +467,3 @@ function toggleIssues() {
     helpShowed = !helpShowed;
 }
 generateTable();
-console.log('LOGGED IN:' + loggedIn);

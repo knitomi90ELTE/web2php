@@ -5,7 +5,7 @@ require_once('common/fileio.php');
 $levels = fajlbol_betolt('data/level.json');
 $users = fajlbol_betolt('data/users.json');
 $newscore = $_POST['score'];
-$levelID = $_POST['levelID'];
+$levelID = (string)$_POST['levelID'];
 
 if(!isset($_SESSION['user']['scores'][$levelID])){
     $_SESSION['user']['scores'][$levelID] = $newscore;
@@ -16,7 +16,13 @@ if(!isset($_SESSION['user']['scores'][$levelID])){
     }
 }
 $users[$_SESSION['user']['email']] = $_SESSION['user'];
-fajlba_ment($users, 'data/users.json');
+fajlba_ment('data/users.json',$users);
 
-echo var_dump($users);
+$highscoreAtLevel = (int)$levels[$levelID]['highscore'];
 
+if($newscore > $highscoreAtLevel){
+    $levels[$levelID]['highscore'] = $newscore;
+    $levels[$levelID]['recorder'] = $_SESSION['user']['name'];
+}
+
+fajlba_ment('data/level.json',$levels);

@@ -62,7 +62,7 @@
                     <input type="number" class="form-control input-sm" id="m" min="3" value="<?= (empty($_GET['y'])) ? 10 : $_GET['y'] ?>">
                     <br>
                     <label for="k">Tereptárgyak száma:</label>
-                    <input type="number" class="form-control input-sm" id="k" min="0" value="<?= (empty($_GET['obs'])) ? 10 : $_GET['obs'] ?>">
+                    <input type="number" class="form-control input-sm" id="k" min="0" value="<?= (empty($_GET['obs'])) ? 2 : $_GET['obs'] ?>">
                     <br>
                     <button id="generateButton" type="button" class="btn btn-info">Pályakészítés</button>
                 </div>
@@ -89,9 +89,16 @@
                 </div>
                 <div class="my-modal-body">
                     <h2 id="modal-message" class="text-center"></h2>
-                    <div class="form-group center-block">
-                        <button id="newGame" type="button" class="btn btn-success center-block">Új játék</button>
-                    </div>
+                    <?php if (isset($_SESSION['belepve'])): ?>
+                        <div class="row form-group center-block">
+                            <div class="col-md-6"><button id="newGame" type="button" class="btn btn-success btn-block">Új játék</button></div>
+                            <div class="col-md-6"><a href="admin" type="button" class="btn btn-info btn-block">Vissza a listához</a></div>
+                        </div>
+                    <?php else: ?>
+                        <div class="form-group center-block">
+                            <button id="newGame" type="button" class="btn btn-success center-block">Új játék</button>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="my-modal-footer"></div>
             </div>

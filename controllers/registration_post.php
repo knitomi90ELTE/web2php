@@ -34,10 +34,10 @@ if (validate($_POST, $rules, $data, $errors)) {
         'name' => $data['name'],
         'password' => md5($data['password']),
         'email' => $data['email'],
-        'score' => 0
+        'scores' => json_decode ("{}")
     ];
 
-    $jelszavak[] = $array;
+    $jelszavak[$data['email']] = $array;
     fajlba_ment('data/users.json', $jelszavak);
 
     redirect('login');

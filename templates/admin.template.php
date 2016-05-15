@@ -60,9 +60,8 @@ $keys = [
     <ul id="levelList">
         <?php foreach($levels as $id => $arr) : ?>
             <li>
+            <div><strong><?=$arr['name'] ?></strong></div>
                 <ul>
-
-                    <li>Név: <?=$arr['name'] ?></li>
                     <li>Szélesség: <?=$arr['x'] ?></li>
                     <li>Magasság: <?=$arr['y'] ?></li>
                     <li>Akadályok száma: <?=$arr['obs'] ?></li>
@@ -73,7 +72,7 @@ $keys = [
                         <li>Saját legjobb: még nincs</li>
                     <?php endif; ?>
                 </ul>
-                <a class="btn btn-success btn-xs" href="game?x=<?= $arr['x']?>&y=<?= $arr['y']?>&obs=<?= $arr['obs']?>&levelID=<?= $id ?>">START</a>
+                <a class="btn btn-success btn-sm" href="game?x=<?= $arr['x']?>&y=<?= $arr['y']?>&obs=<?= $arr['obs']?>&levelID=<?= $id ?>">START</a>
             </li>
         <?php endforeach ?>
     </ul>
