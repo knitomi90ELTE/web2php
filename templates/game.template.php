@@ -13,7 +13,7 @@
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Webfejlesztés 2.</a>
+                    <a class="navbar-brand" href="index">Webfejlesztés 2.</a>
                     <?php if (isset($_SESSION['belepve'])): ?>
                         <a class="navbar-brand" href="logout">Kijelentkezés</a>
                     <?php else: ?>
@@ -96,8 +96,16 @@
                 <div class="my-modal-footer"></div>
             </div>
         </div>
-
+        <script>
+            var loggedIn = false;
+            var levelID = null;
+            <?php if (isset($_SESSION['belepve'])): ?>
+                loggedIn = <?php echo $_SESSION['belepve'] ?>;
+                levelID = <?php echo $_GET['levelID'] ?>;
+            <?php endif; ?>
+        </script>
         <script src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/js/selector.js" type="text/javascript"></script>
+        <script src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/js/ajax.js" type="text/javascript"></script>
         <script src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/js/mymodal.js" type="text/javascript"></script>
         <script src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/js/game.js" type="text/javascript"></script>
     </body>

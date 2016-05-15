@@ -11,7 +11,9 @@ $keys = [
     'name' => 'Név',
     'x' => 'Szélesség',
     'y' => 'Magasság',
-    'obs' => 'Akadályok száma'
+    'obs' => 'Akadályok száma',
+    'highscore' => 'Max pont',
+    'recorder' => 'Legtöbb pontot elért',
 ];
 ?>
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ $keys = [
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Webfejlesztés 2.</a>
+            <a class="navbar-brand" href="index">Webfejlesztés 2.</a>
             <?php if ($logged_in): ?>
                 <a class="navbar-brand" href="logout">Kijelentkezés</a>
             <?php endif; ?>
@@ -44,26 +46,34 @@ $keys = [
     <?php if ($_SESSION['admin']): ?>
         <h3>Új pálya hozzáadása</h3>
         <form action="" id="form">
-            <label>Név</label>
+            <label>Név:</label>
             <input type="text" name="name" id="name">
             <label>Szélesség:</label>
             <input type="number" name="x" id="x">
-            <label>Magasság</label>
+            <label>Magasság:</label>
             <input type="number" name="y" id="y">
             <label>Akadályok száma:</label>
             <input type="number" name="obs" id="obs">
             <input type="button" value="Mentés" id="newLevelButton">
         </form>
     <?php endif; ?>
-    <ul>
-        <?php foreach($levels as $level) : ?>
+    <ul id="levelList">
+        <?php foreach($levels as $id => $arr) : ?>
             <li>
                 <ul>
-                    <?php foreach($level as $k => $v) : ?>
-                        <li><?= $keys[$k] ?>: <?= $v ?></li>
-                    <?php endforeach ?>
+
+                    <li>Név: <?=$arr['name'] ?></li>
+                    <li>Szélesség: <?=$arr['x'] ?></li>
+                    <li>Magasság: <?=$arr['y'] ?></li>
+                    <li>Akadályok száma: <?=$arr['obs'] ?></li>
+                    <li>Rekord: <?=$arr['recorder'] ?>, pont: <?=$arr['highscore'] ?></li>
+                    <?php if (isset($_SESSION['user']['scores'][$id])): ?>
+                        <li>Saját legjobb: <?=$_SESSION['user']['scores'][$id]?></li>
+                    <?php else: ?>
+                        <li>Saját legjobb: még nincs</li>
+                    <?php endif; ?>
                 </ul>
-                <a class="btn btn-success btn-xs" href="game?x=<?= $level['x']?>&y=<?= $level['y']?>&obs=<?= $level['obs']?>">START</a>
+                <a class="btn btn-success btn-xs" href="game?x=<?= $arr['x']?>&y=<?= $arr['y']?>&obs=<?= $arr['obs']?>&levelID=<?= $id ?>">START</a>
             </li>
         <?php endforeach ?>
     </ul>

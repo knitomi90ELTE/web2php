@@ -13,7 +13,7 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Webfejlesztés 2.</a>
+            <a class="navbar-brand" href="index">Webfejlesztés 2.</a>
         </div>
     </div>
 </nav>

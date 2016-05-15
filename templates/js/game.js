@@ -279,6 +279,20 @@ function resetData() {
 function gameOver() {
     pauseGame();
     showMyModal("Sajnos akadálynak vagy falnak ütköztél");
+    var data = 'score='+game.score+'&levelID='+levelID;
+    if(loggedIn){
+        ajax({
+            mod : 'POST',
+            url: 'http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/index.php/savescore',
+            postadat: data,
+            siker : function(xhr, data){
+                console.log('siker');
+            },
+            hiba : function (xhr) {
+                console.log('hiba');
+            }
+        });
+    }
 }
 
 function startGame() {
@@ -452,3 +466,4 @@ function toggleIssues() {
     helpShowed = !helpShowed;
 }
 generateTable();
+console.log('LOGGED IN:' + loggedIn);

@@ -11,35 +11,34 @@ function onClick(e) {
     var y = $('#y').value;
     var obs = $('#obs').value;
 
-    if (x < 3 || y < 3 || obs > x*y-1) {
+    if (x < 3 || y < 3 || obs > x*y-1 || name == '') {
         alert('hibás adatok');
         return;
     }
-    console.log(name + ' ' + x + ' ' + y + ' ' + obs + ' ');
-
-
-    var data = new FormData();
-    data.append('name', name);
-    data.append('x', x);
-    data.append('y', y);
-    data.append('obs', obs);
-
+    var data = 'name='+name+'&x='+x+'&y='+y+'&obs='+obs;
 
     ajax({
         mod: 'POST',
         url: 'http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/index.php/newgame',
-        postadat: data/*{
-            'name' : name,
-            'x' : x,
-            'y' : y,
-            'obs' : obs
-        }*/,
+        postadat: data,
         siker: function (xhr, data) {
-            //var newLevel = JSON.parse(data);
-            console.log(data);
+            $('#levelList').innerHTML += generateNewLevel(JSON.parse(data));
         },
         hiba: function(xhr){
             console.log('hiba');
         }
     });
+}
+
+function generateNewLevel(content) {
+    console.log(content);
+    var s = '<li><ul>';
+    s += `<li>Név: ${content["name"]}</li>`;
+    s += `<li>Szélesség: ${content["x"]}</li>`;
+    s += `<li>Magasság: ${content["y"]}</li>`;
+    s += `<li>Akadályok száma: ${content["obs"]}</li>`;
+    s += `<li>Max pont: ${content["highscore"]}</li>`;
+    s += `<li>Legtöbb pontot elért: ${content["recorder"]}</li>`;
+    s += `</ul><a class="btn btn-success btn-xs" href="game?x=${content.x}&y=${content.y}&obs=${content.obs}">START</a></li>`;
+    return s;
 }

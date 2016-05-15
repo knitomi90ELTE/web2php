@@ -22,6 +22,7 @@ function ajax(opts) {
             }
         }
     }, false);
+
     xhr.send(mod == 'POST' ? postadat : null);
     return xhr;
 }
