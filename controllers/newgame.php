@@ -22,7 +22,7 @@ $response = [
     'obs' => $obs,
     'scoreboard' => json_decode ("[]")
 ];
-$levels[$index] = $response;
+$levels['lvl'.(string)$index] = $response;
 
 fajlba_ment('data/level.json', $levels);
 

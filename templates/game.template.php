@@ -128,7 +128,7 @@
     var levelID = null;
     <?php if (logged_in()): ?>
     loggedIn = <?php echo $_SESSION['belepve'] ?>;
-    levelID = <?php echo $_GET['levelID'] ?>;
+    levelID = <?php echo $levelID ?>;
     <?php endif; ?>
 </script>
 <script src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/js/selector.js" type="text/javascript"></script>
