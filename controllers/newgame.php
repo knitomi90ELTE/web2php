@@ -1,7 +1,10 @@
 <?php
-
+require_once('common/auth.php');
 require_once('common/fileio.php');
-
+if(!logged_in()){
+    echo 'Not logged in.';
+    die();
+}
 $input = $_POST;
 $name = $input['name'];
 $x = $input['x'];
@@ -17,8 +20,7 @@ $response = [
     'x' => $x,
     'y' => $y,
     'obs' => $obs,
-    'highscore' => 0,
-    'recorder' => 'senki',
+    'scoreboard' => json_decode ("[]")
 ];
 $levels[$index] = $response;
 

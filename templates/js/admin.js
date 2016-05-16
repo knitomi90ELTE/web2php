@@ -11,7 +11,7 @@ function onClick(e) {
     var y = $('#y').value;
     var obs = $('#obs').value;
 
-    if (x < 3 || y < 3 || obs > x*y-1 || name == '') {
+    if (x < 3 || y < 3 || obs > x*y-1 || obs < 0 || name == '') {
         alert('hibás adatok');
         return;
     }
@@ -23,22 +23,25 @@ function onClick(e) {
         postadat: data,
         siker: function (xhr, data) {
             $('#levelList').innerHTML += generateNewLevel(JSON.parse(data));
+            $('#result').innerHTML = 'Sikeres hozzáadás!';
         },
         hiba: function(xhr){
             console.log('hiba');
+            $('#result').innerHTML = 'Sikertelen hozzáadás!';
         }
     });
 }
 
 function generateNewLevel(content) {
     console.log(content);
-    var s = '<li><ul>';
-    s += `<li>Név: ${content["name"]}</li>`;
+    var s = '<li>';
+    s += `<div><strong>${content["name"]}</strong></div>`
+    s += '<ul>';
     s += `<li>Szélesség: ${content["x"]}</li>`;
     s += `<li>Magasság: ${content["y"]}</li>`;
     s += `<li>Akadályok száma: ${content["obs"]}</li>`;
-    s += `<li>Max pont: ${content["highscore"]}</li>`;
-    s += `<li>Legtöbb pontot elért: ${content["recorder"]}</li>`;
-    s += `</ul><a class="btn btn-success btn-xs" href="game?x=${content.x}&y=${content.y}&obs=${content.obs}">START</a></li>`;
+    s += `<li>Rekord: Még nincs</li>`;
+    s += `<li>Saját legjobb: még nincs</li>`;
+    s += `</ul><a class="btn btn-success btn-sm" href="game?x=${content.x}&y=${content.y}&obs=${content.obs}">START</a></li>`;
     return s;
 }

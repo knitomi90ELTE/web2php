@@ -279,7 +279,6 @@ function resetData() {
 
 function gameOver() {
     pauseGame();
-    showMyModal("Sajnos akadálynak vagy falnak ütköztél");
     if(loggedIn){
         var data = 'score='+game.score+'&levelID='+levelID;
         console.log('sending ajax...' + data);
@@ -288,13 +287,27 @@ function gameOver() {
             url: 'http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/index.php/savescore',
             postadat: data,
             siker : function(xhr, data){
-                console.log('siker');
+                var d = JSON.parse(data);
+                $('#scorelist').innerHTML = generateList(d);
+                showMyModal("Sajnos akadálynak vagy falnak ütköztél");
             },
             hiba : function (xhr) {
                 console.log('hiba');
             }
         });
+    } else {
+        showMyModal("Sajnos akadálynak vagy falnak ütköztél");
     }
+}
+
+function generateList(list){
+    var s = '';
+    for(var i = 0; i < list.length; i++){
+        s += '<li class="text-center" style="padding-top: 5px;">';
+        s += `${i+1}. Név: ${list[i]['name']} - Pontszám: ${list[i]['score']}`;
+        s += '</li>';
+    }
+    return s;
 }
 
 function startGame() {
@@ -399,7 +412,10 @@ function moveSnake() {
 }
 
 function isPlaceNotOk(coord) {
-    return isObstacle(coord) || isOut(coord) || isSnake(coord);
+    var ob = isObstacle(coord);
+    var ou = isOut(coord);
+    var is = isSnake(coord);
+    return ob || ou || is;
 }
 
 function isOut(coord) {

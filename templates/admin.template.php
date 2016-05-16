@@ -44,24 +44,29 @@
             <label>Akadályok száma:</label>
             <input type="number" name="obs" id="obs">
             <input type="button" value="Mentés" id="newLevelButton">
+            <div id="result"></div>
         </form>
     <?php endif; ?>
     <ul id="levelList">
-        <?php foreach($levels as $id => $arr) : ?>
+        <?php foreach($levels as $id => $data) : ?>
             <li>
-            <div><strong><?=$arr['name'] ?></strong></div>
+            <div><strong><?=$data['name'] ?></strong></div>
                 <ul>
-                    <li>Szélesség: <?=$arr['x'] ?></li>
-                    <li>Magasság: <?=$arr['y'] ?></li>
-                    <li>Akadályok száma: <?=$arr['obs'] ?></li>
-                    <li>Rekord: <?=$arr['recorder'] ?>, pont: <?=$arr['highscore'] ?></li>
+                    <li>Szélesség: <?=$data['x'] ?></li>
+                    <li>Magasság: <?=$data['y'] ?></li>
+                    <li>Akadályok száma: <?=$data['obs'] ?></li>
+                    <?php if (isset($recorders[$id])): ?>
+                    <li>Rekord: <?= $recorders[$id]['name'] ?>, pont: <?= $recorders[$id]['score'] ?></li>
+                    <?php else: ?>
+                    <li>Rekord: Még nincs</li>
+                    <?php endif; ?>
                     <?php if (isset($_SESSION['user']['scores'][$id])): ?>
                         <li>Saját legjobb: <?=$_SESSION['user']['scores'][$id]?></li>
                     <?php else: ?>
                         <li>Saját legjobb: még nincs</li>
                     <?php endif; ?>
                 </ul>
-                <a class="btn btn-success btn-sm" href="game?x=<?= $arr['x']?>&y=<?= $arr['y']?>&obs=<?= $arr['obs']?>&levelID=<?= $id ?>">START</a>
+                <a class="btn btn-success btn-sm" href="game?x=<?= $data['x']?>&y=<?= $data['y']?>&obs=<?= $data['obs']?>&levelID=<?= $id ?>">START</a>
             </li>
         <?php endforeach ?>
     </ul>

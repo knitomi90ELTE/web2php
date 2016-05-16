@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <title>Beadandó - Webfejlesztés 2.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha256-oqtj+Pkh1c3dgdH6V9qoS7qwhOy2UZfyVK0qGLa9dCc= sha512-izanB/WZ07hzSPmLkdq82m5xS7EH/qDMgl5aWR37EII+rJOi5c6ouJ3PYnrw6K+DWQcnMZ+nO1NqDr6SBKLBDg==" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css" rel="stylesheet"
+          integrity="sha256-oqtj+Pkh1c3dgdH6V9qoS7qwhOy2UZfyVK0qGLa9dCc= sha512-izanB/WZ07hzSPmLkdq82m5xS7EH/qDMgl5aWR37EII+rJOi5c6ouJ3PYnrw6K+DWQcnMZ+nO1NqDr6SBKLBDg=="
+          crossorigin="anonymous">
     <link rel="shortcut icon" type="image/png" href="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/images/snake.png">
     <link rel="stylesheet" type="text/css" href="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/css/style.css">
     <link rel="stylesheet" type="text/css" href="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/css/mymodal.css">
@@ -78,6 +80,9 @@
             <p class="lead" id="score">Score: 1</p>
             <p class="lead" id="scroll">Aktív tekercs: nincs</p>
         </div>
+        <?php if(!logged_in()) :?>
+        <div class="lead">Ha változatosabb pályákon szeretnél játszani, kérlek jelentkezz be!</div>
+        <?php endif; ?>
         <div class="well light-green">
             <table id="gameTable">
 
@@ -93,20 +98,26 @@
         </div>
         <div class="my-modal-body">
             <h2 id="modal-message" class="text-center"></h2>
-            <?php if (isset($_SESSION['belepve'])): ?>
-                <div class="row form-group center-block">
-                    <div class="col-md-6">
-                        <button id="newGame" type="button" class="btn btn-success btn-block">Új játék</button>
-                    </div>
-                    <div class="col-md-6">
+            <h3 class="text-center">TOPLISTA</h3>
+            <div class="row">
+                <ul id="scorelist" style="width: 50%; margin-left: 25%;" class="list-unstyled">
+
+                </ul>
+            </div>
+
+
+            <div class="row form-group center-block">
+                <div class="col-md-6">
+                    <button id="newGame" type="button" class="btn btn-success btn-block">Új játék</button>
+                </div>
+                <div class="col-md-6">
+                    <?php if (isset($_SESSION['belepve'])): ?>
                         <a href="admin" type="button" class="btn btn-info btn-block">Vissza a listához</a>
-                    </div>
+                    <?php else: ?>
+                        <a href="index" type="button" class="btn btn-info btn-block">Vissza a kezdőlapra</a>
+                    <?php endif; ?>
                 </div>
-            <?php else: ?>
-                <div class="form-group center-block">
-                    <button id="newGame" type="button" class="btn btn-success center-block">Új játék</button>
-                </div>
-            <?php endif; ?>
+            </div>
         </div>
         <div class="my-modal-footer"></div>
     </div>

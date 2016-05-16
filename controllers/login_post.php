@@ -9,6 +9,11 @@ function validate($input, &$errors, $jelszavak) {
 
     $email = trim($input['email']);
     $jelszo = trim($input['password']);
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Hibás email formátum!';
+    }
+
     if (!(array_key_exists($email, $jelszavak) && $jelszavak[$email]['password'] == md5($jelszo))) {
         $errors[] = 'Hibás bejelentkezési adatok!';
     }
