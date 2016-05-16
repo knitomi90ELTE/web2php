@@ -4,7 +4,6 @@ require_once('common/fileio.php');
 require_once('common/flash.php');
 require_once('common/navigation.php');
 
-
 function validate($input, &$errors, $jelszavak) {
     $errors = [];
 

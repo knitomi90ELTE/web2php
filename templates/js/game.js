@@ -242,6 +242,7 @@ function clearTable() {
 }
 
 function resetData() {
+    //ez ide nem kell, mert bent maradhatnak a GET-tel jövő paraméterek
     //$('#n').value = 10;
     //$('#m').value = 10;
     //$('#k').value = 2;

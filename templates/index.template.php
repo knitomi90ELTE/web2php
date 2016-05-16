@@ -14,13 +14,26 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="index">Webfejlesztés 2.</a>
+            <?php if (isset($_SESSION['belepve'])): ?>
+                <a class="navbar-brand" href="logout">Kijelentkezés</a>
+            <?php else: ?>
+                <a class="navbar-brand" href="login">Bejelentkezés</a>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
-    <div class="container">
-        <a href="login">LOGIN</a>
-        <a href="registration">REGISTRATION</a>
-        <a href="game">GAME</a>
+<div class="container">
+    <div class="center-block" style="width: 35%;"><a href="game"><img src="http://webprogramozas.inf.elte.hu/hallgatok/knitomi90/bead/templates/images/python-logo-outline-320.png" alt="Snake logo" class="img-responsive center-block"></a></div>
+    <div class="lead text-center">A játékhoz kattints a képre!</div>
+    <div class="row center-block" style="width: 50%;">
+        <div class="col-md-6">
+            <a href="login" type="button" class="btn btn-info btn-block">BELÉPÉS</a>
+        </div>
+        <div class="col-md-6">
+            <a href="registration" type="button" class="btn btn-info btn-block">REGISZTRÁCIÓ</a>
+        </div>
     </div>
+
+</div>
 </body>
 </html>

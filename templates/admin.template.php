@@ -1,21 +1,3 @@
-<?php
-require_once('common/auth.php');
-require_once('common/navigation.php');
-
-if(!logged_in()){
-    redirect('login');
-}
-$logged_in = true;
-
-$keys = [
-    'name' => 'Név',
-    'x' => 'Szélesség',
-    'y' => 'Magasság',
-    'obs' => 'Akadályok száma',
-    'highscore' => 'Max pont',
-    'recorder' => 'Legtöbb pontot elért',
-];
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +24,13 @@ $keys = [
     <div class="page-header">
         <h1>Pályalista</h1>
     </div>
+    <?php if ($errors) : ?>
+        <ul class="list-group">
+            <?php foreach ($errors as $error) : ?>
+                <li class="list-group-item list-group-item-danger"><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
     <h2 class="lead">Üdvözlet <?= $_SESSION['user']['name'] ?></h2>
     <?php if ($_SESSION['admin']): ?>
         <h3>Új pálya hozzáadása</h3>

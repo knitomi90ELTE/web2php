@@ -11,7 +11,6 @@ Ehhez név, jelszó, email cím megadása szükséges.
 Mindegyik kötelező mező, email cím formátumának ellenőrzése szükséges.
 
 */
-//var_dump($_POST);
 $jelszavak = fajlbol_betolt('data/users.json');
 $errors = [];
 $data = [];
