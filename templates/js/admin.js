@@ -35,7 +35,7 @@ function onClick(e) {
 function generateNewLevel(content) {
     console.log(content);
     var s = '<li>';
-    s += `<div><strong>${content["name"]}</strong></div>`
+    s += `<div><strong>${content["name"]}</strong></div>`;
     s += '<ul>';
     s += `<li>Szélesség: ${content["x"]}</li>`;
     s += `<li>Magasság: ${content["y"]}</li>`;
